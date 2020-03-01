@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../blocs/movie_detail_bloc_provider.dart';
-import '../blocs/movies_bloc.dart';
 import '../models/item_model.dart';
-import 'movie_detail.dart';
+import '../blocs/movies_bloc.dart';
 
 class MovieList extends StatefulWidget {
+  final MoviesBloc _bloc;
+
+  MovieList(this._bloc);
+
   @override
   State<StatefulWidget> createState() {
     return MovieListState();
@@ -16,12 +17,13 @@ class MovieListState extends State<MovieList> {
   @override
   void initState() {
     super.initState();
-    bloc.fetchAllMovies();
+    widget._bloc.init();
+    widget._bloc.fetchAllMovies();
   }
 
   @override
   void dispose() {
-    bloc.dispose();
+    widget._bloc.dispose();
     super.dispose();
   }
 
@@ -32,7 +34,7 @@ class MovieListState extends State<MovieList> {
         title: Text('Popular Movies'),
       ),
       body: StreamBuilder(
-        stream: bloc.allMovies,
+        stream: widget._bloc.allMovies,
         builder: (context, AsyncSnapshot<ItemModel> snapshot) {
           if (snapshot.hasData) {
             return buildList(snapshot);
@@ -49,13 +51,14 @@ class MovieListState extends State<MovieList> {
     return GridView.builder(
         itemCount: snapshot.data.results.length,
         gridDelegate:
-            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemBuilder: (BuildContext context, int index) {
           return GridTile(
             child: InkResponse(
               enableFeedback: true,
               child: Image.network(
-                'https://image.tmdb.org/t/p/w185${snapshot.data.results[index].poster_path}',
+                'https://image.tmdb.org/t/p/w185${snapshot.data
+                    .results[index].poster_path}',
                 fit: BoxFit.cover,
               ),
               onTap: () => openDetailPage(snapshot.data, index),
@@ -65,21 +68,8 @@ class MovieListState extends State<MovieList> {
   }
 
   openDetailPage(ItemModel data, int index) {
-    final page = MovieDetailBlocProvider(
-      child: MovieDetail(
-        title: data.results[index].title,
-        posterUrl: data.results[index].backdrop_path,
-        description: data.results[index].overview,
-        releaseDate: data.results[index].release_date,
-        voteAverage: data.results[index].vote_average.toString(),
-        movieId: data.results[index].id,
-      ),
-    );
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(builder: (context) {
-        return page;
-      }),
-    );
+      'movieDetail', arguments: data.results[index]);
   }
 }

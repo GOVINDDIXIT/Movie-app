@@ -1,16 +1,26 @@
-# movie_app
+# My Movies
 
-A new Flutter application.
+A Flutter app showcasing a list of popular movies from MovieDB. 
 
-## Getting Started
+Here is a quick video of the app:
 
-This project is a starting point for a Flutter application.
+https://www.youtube.com/watch?v=krXb9CzGRxU
 
-A few resources to get you started if this is your first Flutter project:
+Tutorial of the project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Part 1: https://medium.com/flutterpub/architecting-your-flutter-project-bd04e144a8f1
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Part 2: https://medium.com/flutterpub/architect-your-flutter-project-using-bloc-pattern-part-2-d8dd1eca9ba5
+
+Part 3: https://medium.com/@sagarsuri56/compile-time-dependency-injection-in-flutter-95bb190b4a71
+
+Part 4: https://medium.com/@sagarsuri56/integration-and-unit-testing-in-flutter-f08e4bd961d5
+
+----------------
+
+Contact me:
+
+sagarsuri56@gmail.com
+
+LinkedIn profile: 
+https://www.linkedin.com/in/sagar-suri/
