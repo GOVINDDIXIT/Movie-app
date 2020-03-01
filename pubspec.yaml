@@ -14,7 +14,7 @@ dependencies:
       path: package/inject
 
 dependency_overrides:
-  analyzer: ^0.36.3
+  analyzer: ^0.37.1
 
 dev_dependencies:
   flutter_test:

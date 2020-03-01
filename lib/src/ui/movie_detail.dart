@@ -14,14 +14,14 @@ class MovieDetail extends StatefulWidget {
   final int movieId;
 
   MovieDetail(
-    this.bloc,
-    this.title,
-    this.posterUrl,
-    this.description,
-    this.releaseDate,
-    this.voteAverage,
-    this.movieId,
-  );
+      this.bloc,
+      this.title,
+      this.posterUrl,
+      this.description,
+      this.releaseDate,
+      this.voteAverage,
+      this.movieId,
+      );
 
   @override
   State<StatefulWidget> createState() {
@@ -83,9 +83,9 @@ class MovieDetailState extends State<MovieDetail> {
                   elevation: 0.0,
                   flexibleSpace: FlexibleSpaceBar(
                       background: Image.network(
-                    "https://image.tmdb.org/t/p/w500$posterUrl",
-                    fit: BoxFit.cover,
-                  )),
+                        "https://image.tmdb.org/t/p/w500$posterUrl",
+                        fit: BoxFit.cover,
+                      )),
                 ),
               ];
             },
@@ -145,24 +145,14 @@ class MovieDetailState extends State<MovieDetail> {
                       StreamBuilder(
                         stream: widget.bloc.movieTrailers,
                         builder: (context,
-                            AsyncSnapshot<Future<TrailerModel>> snapshot) {
+                            AsyncSnapshot<TrailerModel> snapshot) {
                           if (snapshot.hasData) {
-                            return FutureBuilder(
-                              future: snapshot.data,
-                              builder: (context,
-                                  AsyncSnapshot<TrailerModel> itemSnapShot) {
-                                if (itemSnapShot.hasData) {
-                                  if (itemSnapShot.data.results.length > 0)
-                                    return trailerLayout(itemSnapShot.data);
-                                  else
-                                    return noTrailer(itemSnapShot.data);
-                                } else {
-                                  return Center(
-                                      child: CircularProgressIndicator());
-                                }
-                              },
-                            );
+                            if (snapshot.data.results.length > 0)
+                              return trailerLayout(snapshot.data);
+                            else
+                              return noTrailer(snapshot.data);
                           } else {
+                            debugPrint("${snapshot.connectionState.toString()}");
                             return Center(child: CircularProgressIndicator());
                           }
                         },
