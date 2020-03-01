@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'movie_detail_bloc.dart';
+
 export 'movie_detail_bloc.dart';
 
 class MovieDetailBlocProvider extends InheritedWidget {
@@ -16,7 +18,7 @@ class MovieDetailBlocProvider extends InheritedWidget {
 
   static MovieDetailBloc of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(MovieDetailBlocProvider)
-    as MovieDetailBlocProvider)
+            as MovieDetailBlocProvider)
         .bloc;
   }
 }
